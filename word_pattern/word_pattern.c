@@ -32,6 +32,7 @@ int wordPattern(char* pattern, char* str)
 			}
 		}
 	}
+	free(tmp_str);
 	return 1;
 not_match:
 	free(tmp_str);
