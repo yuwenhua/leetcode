@@ -35,22 +35,18 @@ int compareVersion(char* version1, char* version2)
 
 	for(i = 0; i < v1_len; i++) {
 		ver1[i] = atoi(token1[i]);
-		//printf("%s,%d ", token1[i],ver1[i]);
 	}
 	for(i = 0; i < v2_len; i++) {
 		ver2[i] = atoi(token2[i]);
-		//printf("%s,%d ", token2[i],ver2[i]);
 	}
 	free(tmp_str1);
 	free(tmp_str2);
 	max_len = v1_len > v2_len ? v1_len : v2_len;
-	//printf("len = %d\n", max_len);
 	for(i = 0; i < max_len;i++) {
 
 		if(ver1[i] > ver2[i])
 			return 1;
 		else if(ver1[i] < ver2[i]){
-			//printf("_%d %d < %d_ ", i, ver1[i], ver2[i]);
 			return -1;
 		}
 	}
