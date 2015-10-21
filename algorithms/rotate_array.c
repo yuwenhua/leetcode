@@ -11,7 +11,6 @@ void rotate(int* nums, int numsSize, int k) {
 	
 	
 	k = k % numsSize;
-	printf("k = %d\n", k);
 	if(! nums || numsSize <= 0) {
 		return;
 	}
