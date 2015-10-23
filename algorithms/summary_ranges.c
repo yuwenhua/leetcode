@@ -92,8 +92,10 @@ int main(int argc, char **argv)
 	printf("size: %d\n", returnSize);
 	for(i = 0; i < returnSize; i++) {
 		printf("%s, ",summary[i]);
+		free(summary[i]);
 	}
 	printf("\n");
+	free(summary);
 
 	return 0;
 }
