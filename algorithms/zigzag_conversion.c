@@ -20,7 +20,6 @@
 #include <string.h>
 #include <stdio.h>
 
-
 char* convert(char* s, int numRows) {
 	char *result = NULL;
 	int i, j, cnt = 0;
@@ -32,10 +31,10 @@ char* convert(char* s, int numRows) {
 
 	len = strlen(s);
 	str = (char **)malloc(numRows * sizeof(char*));
-	memset(str, numRows*sizeof(char*), 0);
+	memset(str, 0, numRows*sizeof(char*));
 
 	result = (char *)malloc(sizeof(char) * (len+1));
-	memset(result, len+1, 0);
+	memset(result, 0, len+1);
 
 	if(numRows <= 1||numRows >= len) {
 		strcpy(result, s);
@@ -44,14 +43,9 @@ char* convert(char* s, int numRows) {
 
 	for(i = 0; i < numRows; i++) {
 		str[i] = (char *)malloc(sizeof(char) * len);
-		memset(str[i], len, 0);
+		memset(str[i], 0, len);
 	}
 	
-	for(i = 0; i < len;i++) {
-		for(j = 0; j < numRows; j++) {
-			str[j][i] = 0;
-		}
-	}
 
 	for(i = 0; i < len; i++) {
 		for(j = 0; j < numRows; j++) {
