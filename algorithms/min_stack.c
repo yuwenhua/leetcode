@@ -33,7 +33,7 @@ void minStackCreate(MinStack *stack, int maxSize) {
 	if(!stack) 
 		return;
 
-	stack->top = (int*) calloc(sizeof(int), maxSize);
+	stack->top = (int*) calloc(maxSize,sizeof(int));
 	stack->bot = stack->top + maxSize -1;
 	stack->top = stack->bot;
 	stack->maxSize = maxSize;

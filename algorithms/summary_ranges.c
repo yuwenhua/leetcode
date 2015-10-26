@@ -33,13 +33,13 @@ char** summaryRanges(int* nums, int numsSize, int* returnSize) {
 
 	if(numsSize == 1) {
 		(*returnSize)++;
-		result[*returnSize-1] = (char *)calloc(sizeof(char), 32);
+		result[*returnSize-1] = (char *)calloc(32, sizeof(char));
 		sprintf(result[*returnSize-1], "%d", start);
 	}
 	for(i = 1; i < numsSize; i++)  {
 		if((nums[i] != nums[i-1]+1) ) {
 			(*returnSize)++;
-			result[*returnSize-1] = (char *)calloc(sizeof(char), 32);
+			result[*returnSize-1] = (char *)calloc(32, sizeof(char));
 			end = nums[i-1];
 			if(start < end) {
 				sprintf(result[*returnSize-1], "%d->%d", start, end);
@@ -53,7 +53,7 @@ char** summaryRanges(int* nums, int numsSize, int* returnSize) {
 		}
 		if(i == numsSize-1){
 			(*returnSize)++;
-			result[*returnSize-1] = (char *)calloc(sizeof(char), 32);
+			result[*returnSize-1] = (char *)calloc(32, sizeof(char));
 			result[*returnSize-1] = result[*returnSize-1];
 			end = nums[i];
 			if(start < end) {
