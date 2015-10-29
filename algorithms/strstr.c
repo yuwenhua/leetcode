@@ -11,39 +11,70 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+int *get_next(char *p)
+{
+	int i = 0, j = -1;
+	int len;
+	int *next;
 
-int strStr(char* haystack, char* needle) {
-	int i, j;
-	int len, len_needle;
-	int result = -1;
 
-	if(!haystack || !needle)
-		return -1;
-
-	len = strlen(haystack);
-	len_needle = strlen(needle);
-	for(i = 0; i < len; i++) {
-		if(j == len_needle) {
-			result = i;
-			break;
+	len = strlen(p);
+	next = (int *)calloc(sizeof(int), len);
+	next[0] = -1;
+	
+	while(i < len-1)  {
+		if(j == -1 || p[i] == p[j]) {
+			i++;
+			j++;
+			next[i] = j;
 		}
-		for(j = 0; j < len_needle; j++) {
-			if(haystack[i+j]) {
-				if(haystack[i+j] != needle[j])
-					break; //j loop
-			}
+		else {
+			j = next[j];
 		}
 	}
-	return result;
-
+	return next;
 }
 
-int main(int argc, char **argv) 
+int strStr(char* s, char* p) 
 {
-	//int i;
+	int i = 0, j = 0;
+	int p_len, s_len;
+	int *next;
+
+
+	if(!s || !p)
+		return -1;
+	s_len = strlen(s);
+	p_len = strlen(p);
+
+	if(p_len == 0)
+		return 0;
+
+	next = get_next(p);
+	for(i = 0; i < p_len; i++) {
+		printf("%d, ", next[i]);
+	}
+	while(i < s_len && j < p_len) {
+		if(j == -1 || s[i] == p[j]) {
+			i++;
+			j++;
+		}
+		else {
+			j = next[j];
+		}
+	}
+	if( j == p_len)
+		return i-j;
+	else
+		return -1;
+}
+
+int main(int argc, char **argv)
+{
 	int result;
-	char *haystack = "https://leetcode.com/problems/implement-strstr/";
-	char *needle = "problems";
+	
+	char *haystack = "BBC ABCDAB ABCDABCDABDE";
+	char *needle = "ABCDABD";
 
 	result = strStr(haystack, needle);
 
@@ -51,4 +82,3 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-
