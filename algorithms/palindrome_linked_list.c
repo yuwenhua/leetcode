@@ -19,14 +19,14 @@
 #include <stdbool.h>
 
 
-struct list_node {
+struct ListNode {
 	int val;
-	struct list_node *next;
+	struct ListNode *next;
 };
 
-bool isPalindrome(struct list_node* head) {
-	struct list_node *pp = NULL, *p = NULL, *pn = NULL;
-	struct list_node *s1, *s2; //step 1, step 2;
+bool isPalindrome(struct ListNode* head) {
+	struct ListNode *pp = NULL, *p = NULL, *pn = NULL;
+	struct ListNode *s1, *s2; //step 1, step 2;
 
 	if(!head)
 		return false;
@@ -48,7 +48,7 @@ bool isPalindrome(struct list_node* head) {
 		p = pn;
 	}
 	p->next = pp;
-#if 0
+#if 0 
 	s1 = head;
 	while(s1->next){
 		printf("%d->", s1->val);
@@ -70,15 +70,16 @@ bool isPalindrome(struct list_node* head) {
 		}
 		p = p->next;
 		head = head->next;
-	}
-
+	}	
+	if(head->val != p->val) 
+		return false;
 	return true;
 	    
 }
 
-void list_add_tail(struct list_node *head, int val) 
+void list_add_tail(struct ListNode *head, int val) 
 {
-	struct list_node *node, *p;
+	struct ListNode *node, *p;
 	
 	if(!head) {
 		return;
@@ -86,7 +87,7 @@ void list_add_tail(struct list_node *head, int val)
 	p = head;
 	while(p->next)
 		p = p->next;
-	node = (struct list_node*)calloc(1, sizeof(struct list_node));
+	node = (struct ListNode*)calloc(1, sizeof(struct ListNode));
 	node->val = val;
 	node->next = NULL;
 	p->next = node;
@@ -96,15 +97,15 @@ int main (int argc, char **argv)
 {
 	
 	int i;
-	int val[8] = {3,5,7,9,7,5,3,1};
-	struct list_node *head = NULL, *p;
+	int val[] = {1,3,1};
+	struct ListNode *head = NULL, *p;
 	bool result = 0;
 	
-	head = (struct list_node*)calloc(1, sizeof(struct list_node));
-	head->val = 2;
+	head = (struct ListNode*)calloc(1, sizeof(struct ListNode));
+	head->val = 1;
 	head->next = NULL;
 
-	for(i = 0; i < 8; i++) {
+	for(i = 0; i < 3; i++) {
 		list_add_tail(head, val[i]);
 	}
 	
