@@ -26,31 +26,36 @@
 #include <stdbool.h>
 
 bool isIsomorphic(char* s, char* t) {
-	int len;
-	int i,j;
+	char dic_s[128] = {0};
+	char dic_t[128] = {0};
+	int i, len;
+	char cs, ct;
 
 	if(!s || !t)
 		return true;
 
 	len = strlen(s);
 	for(i = 0; i < len; i++) {
-		for(j = i+1; j < len;j++){
-			if(s[i] == s[j]) {
-				if(t[i] != t[j])
-					return false;
-			}
-			else if(t[i] == t[j])
-				return false;
+		cs = s[i];
+		ct = t[i];
+		if(dic_s[(int)cs] == 0 && dic_t[(int)ct] == 0) {
+			dic_s[(int)cs] = ct;
+			dic_t[(int)ct] = cs;
 		}
+		else if(dic_s[(int)cs] != ct)
+			return false;
+		else if(dic_t[(int)ct] != cs)
+			return false;
 	}
+
 
 	return true;
 }
 
 int main(int argc, char **argv) 
 {
-	char *s = "abbefg";
-	char *t = "eggabb";
+	char *s = "aba";
+	char *t = "baa";
 	bool result;
 
 	result = isIsomorphic(s, t);
