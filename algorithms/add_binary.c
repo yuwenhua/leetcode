@@ -15,64 +15,65 @@
 
 char* addBinary(char* a, char* b) {
 	char *result = NULL;
-	int i_a = 0, i_b = 0, i_c = 0;
 	int i = 0;
-	char *first_one = NULL;
+	int len_a, len_b, max;
+	int carry = 0;
+	char tmp_a, tmp_b;
+	int tmp;
+	char *first_one;
 
 	if(!a || !b)
-		return result;
-
-	if(strlen(a) > 32 ||(strlen(b) > 32))
-		return result;
-
-
-	while(a[i]) {
-		if(a[i] == '1') {
-			i_a |= 1;
-		}
-		i++;
-		if(a[i])
-			i_a <<=  1;
-	}
-	i = 0;
-	while(b[i]) {
-		if(b[i] == '1') {
-			i_b |= 1;
-		}
-		i++;
-		if(b[i])
-			i_b <<= 1;
-	}
-	i_c = i_a + i_b;
-	
-	//over flow?
-	if(i_c < i_a || i_c < i_b)  
 		return NULL;
 
-	printf("%d + %d = %d\n", i_a, i_b, i_c);
-	
-	result = (char *)calloc(32, sizeof(char));
-	for(i = 0; i < 32; i ++) {
-		if(i_c & ( 1 << i)) 
-			result[31-i] = '1';
-		else 
-			result[31-i] = '0';
-	}
-	printf("%s + %s = %s\n", a, b, result);
-	first_one = strchr(result, '1');
-	
-	if(!first_one) {
-		sprintf(result, "%d", 0);
-		return result;
-	}
-	return first_one;
+	len_a = strlen(a);
+	len_b = strlen(b);
+	if(len_a > 1023 || len_b > 1023) 
+		return NULL;
 
+	result = (char *)calloc(1024, sizeof(char));
+	memset(result, '0', 1024);
+
+	max = len_a > len_b?len_a:len_b;
+	
+	for(i = 0; i < max; i++) {
+		if(i >= len_a)
+			tmp_a = '0';
+		else 
+			tmp_a = a[len_a-1-i];
+		if(i >= len_b)
+			tmp_b = '0';
+		else
+			tmp_b = b[len_b-1-i];
+		tmp = tmp_a + tmp_b + carry - '0' - '0';
+
+		if(tmp >=2 ) {
+			result[1023-i] = '0' + tmp - 2;
+			carry = 1;
+		}
+		else {
+			result[1023-i] = '0' + tmp;
+			carry = 0;
+		}
+	}
+	if(carry) {
+		result[1023-i] = '1';
+	}
+	first_one = strchr(result, '1');
+	if(first_one == NULL) {
+		result[0] = '0';
+		result[1] = '\0';
+	}
+	else {
+		result = first_one;	
+	}
+	printf("%s+%s = %s\n", a, b, result);
+	return result;
 }
 
 int main(int argc, char **argv) 
 {
-	char *a = "11";
-	char *b = "10";
+	char *a = "111";
+	char *b = "1101";
 	char *result = NULL;
 
 	result = addBinary(a, b);
