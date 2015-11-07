@@ -6,10 +6,12 @@
  * Return: 1 --> 2 --> 3 --> 4 --> 5
  *
  * Credits:
- * Special thanks to @mithmatt for adding this problem and creating all test cases.
+ * Special thanks to @mithmatt for adding this problem and 
+ * creating all test cases.
  *
  * https://leetcode.com/problems/remove-linked-list-elements/
  */
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
