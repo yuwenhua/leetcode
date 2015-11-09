@@ -152,13 +152,13 @@ int travel_tree(struct TreeNode *root, int parent_sum, int sum, bool *result) {
 }
 
 bool hasPathSum(struct TreeNode* root, int sum) {
-	bool result = false;
 
 	if (!root)
 		return 0;
-	travel_tree(root, 0, sum, &result);
-
-	return result;
+	if(root->val == sum && root->left == NULL && root->right == NULL)
+		return true;
+	return hasPathSum(root->left, sum - root->val) || 
+		hasPathSum(root->right, sum - root->val);
 
 }
 int  main(int argc, char **argv) 
