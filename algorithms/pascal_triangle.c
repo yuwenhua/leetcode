@@ -42,9 +42,7 @@ int* getRow(int rowIdx, int* retS)
 				ret[idx][j] = ret[idx^1][j-1] + ret[idx^1][j];
 		}
 	}
-
 	return ret[idx^1];
-
 }
 
 int main(int argc, char **argv)
