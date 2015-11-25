@@ -24,35 +24,20 @@
 #include <math.h>
 
 bool isUgly(int n) {
-	int i, j = 0;
-	int factor[64] = {0};
-	int sqr = 0;
+    if(n <= 0)
+        return false;
 
-	if(n <= 0)
-		return false;
+    while((n % 2) == 0){
+        n >>= 1;
+    }
+    while((n % 3) == 0){
+        n  /= 3;
+    }
+    while((n % 5) == 0){
+        n /= 5;
+    }
 
-	while( n %2 == 0) {
-		factor[j++] = 2;
-		n /= 2;
-	}
-	sqr = sqrt(n);
-	for(i = 3; i <= sqr; i += 2) {  
-		if( n % i == 0) {
-			n /= i;
-			factor[j++] = i;
-			i -= 2;
-		}  
-	}
-	if(n != 1) 
-		factor[j++] = n;	
-	for(i = 0; i < j; i++) {
-		//printf(" %d * ", factor[i]);
-		if(factor[i] != 2 && factor[i] != 3 &&
-				factor[i] != 5)
-			return false;
-	}
-	return true;
-
+    return (n == 1);
 }
 int main(int argc, char **argv) 
 {
