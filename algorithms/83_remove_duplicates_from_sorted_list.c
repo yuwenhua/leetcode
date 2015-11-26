@@ -57,24 +57,27 @@ void list_add_tail(struct ListNode **head, int val)
 struct ListNode* deleteDuplicates(struct ListNode* head) {
 	int val_new;
 	int *val_old = NULL;
-	struct ListNode *new =  NULL; 
+	struct ListNode *p, *q;
 
 	if(!head) 
 		return NULL;
-	while(head) {
-		val_new = head->val;
+	p = head;
+	while(q) {
+		val_new = q->val;
 		if(!val_old) {
 			val_old = (int *)malloc(sizeof(int));
 			*val_old = val_new;
-			list_add_tail(&new, val_new);
+			p->next = q;
+			p=q;
 		}
 		else if(*val_old != val_new) {
 			*val_old = val_new;
-			list_add_tail(&new, val_new);
+			p->next = q;
+			p=q;
 		}
-		head = head->next;
+		q = q->next;
 	}
-	return new; 
+	return head; 
 }
 int main (int argc, char **argv)
 {
