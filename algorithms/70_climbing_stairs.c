@@ -29,7 +29,6 @@ int climbStairs(int n) {
 	return ways[i&0x01] ;
 }
 
-
 int main(int argc, char **argv) 
 {
 	int val[] = {1111221,1,2,3,4,5,6,9,717,19,21,22,23,24,25};
@@ -42,4 +41,5 @@ int main(int argc, char **argv)
 	}
 	return 0;
 }
+
 
