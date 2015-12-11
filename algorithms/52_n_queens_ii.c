@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #include <limits.h>
 
-void print_board(int *a, int n)    //打印输出N皇后的一组解  
+void print_board(int *a, int n)    
 {  
     int i, j;  
 #if 0
@@ -20,9 +20,9 @@ void print_board(int *a, int n)    //打印输出N皇后的一组解
     {  
         for (j = 0; j < n; ++j)  
         {  
-            if (a[i] != j)      //a[i]为初始值  
+            if (a[i] != j)     
                 printf("%c ", '.');  
-            else                //a[i]表示在第i行的第a[i]列可以放置皇后  
+            else              
                 printf("%c ", '#');  
         }  
         printf("\n");  
